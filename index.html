@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>DOCOMO Digital - Direct Carrier Billing SDK</title>
+    <!-- Mobile viewport optimized -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+    <!-- Mobile Internet Explorer allows us to activate ClearType technology for smoothing fonts for easy reading -->
+    <meta http-equiv="cleartype" content="on">
+
+    <!-- Le styles -->
+    <link href="css/bootswatch/Cosmo/bootstrap.min.css" rel="stylesheet">
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/black-tie/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery.tocify.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet" type="text/css">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <link href="css/rainbow/themes/tomorrow-night.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/rainbowlines/theme.css" media="screen" />
+    <link href="https://fonts.googleapis.com/css?family=Allura" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link href="../assets/ico/favicon.ico" rel="shortcut icon">
+    <link href="../assets/ico/apple-touch-icon-144-precomposed.png" rel="apple-touch-icon-precomposed" sizes="144x144">
+    <link href="../assets/ico/apple-touch-icon-114-precomposed.png" rel="apple-touch-icon-precomposed" sizes="114x114">
+    <link href="../assets/ico/apple-touch-icon-72-precomposed.png" rel="apple-touch-icon-precomposed" sizes="72x72">
+    <link href="../assets/ico/apple-touch-icon-57-precomposed.png" rel="apple-touch-icon-precomposed">
+  </head>
+
+  <body style="background-color:white">
+   <div >
+   <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom:0px;">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header; max-width: 100%; height: auto;">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">DOCOMO Digital - Direct Carrier Billing Sdk</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="https://github.com/docomodigital/Android_DcbSdkSample" target="_blank">Github Example</a></li>
+      <!--<li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+          <li class="divider"></li>
+          <li><a href="#">One more separated link</a></li>
+        </ul>
+      </li>-->
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
+     
+
+    <div class="container-fluid" style="margin-top:50px;">
+      <div class="row">
+        <div class="tocify col-sm-3 col-md-3">
+          <div id="toc">
+          <img src="img/logo.png">
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="col-sm-9 col-md-9">
+          <div class="">
+            <h1>Direct Carrier Billing Android Sdk</h1> 
+
+            <br><br>
+
+            <h2>Description</h2>
+            <p>Documentation and example of DOCOMO Digital Direct Carrier Billing (from now on DCB)  SDK for Android</p>
+            <p>Following this guide your app will be techically enabled to be promoted and integrated with Docomo Digital mobile payment.</p>
+            <p>After the integration of the sdk the resultant app can check if the user coming from docomo acquisition and can check expiration date and several informations.</p>
+            <br>
+      <p>This integration can be used in apps already published on Google Play or outside Google Play.</p>
+      </p><br><br>
+          </div>
+          <h2>Requirements</h2>
+          <br>
+          <p class="well">
+          Android Studio ™ with Gradle 2.x+
+          </p>
+          <br>
+          <h2>Getting Started with Java integration</h2>
+          <br>
+          
+		  <p>Let's say you have an app and this is the normal flow of your app launched from the home screen.
+          <br><span class="note"><strong>Note: </strong>At the end of the steps you can take a look at the resultant launch flow after SDK integration</span><br>
+          <img src="img/case0.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="Responsive image"><br>
+
+          <p>
+          <p>Then we can start</p><br><br>
+          <p>You can clone the example app to see a working integration and/or follow the instructions</p>
+		  <p><a href="https://github.com/docomodigital/Android_DcbSdkSample">Android_DcbSdkSample in Github</a><p></p>
+		  <p>git clone https://github.com/docomodigital/Android_DcbSdkSample</p>
+		  		<br><br>
+          		<h2>Step 1 / 4 - Add Maven URL</h2>
+          <p class="well note">
+              In the project build.gradle file add necessary maven url<br>
+              <span class="note"><strong>Note: </strong>the build.gradle placed on the root of the android project</span>
+          </p>
+          	<pre>
+          		<code>
+	....
+
+	<font color="yellow">allprojects {</font>
+	    <font color="yellow">repositories {</font>
+	        jcenter()
+
+	        <font color="yellow">/* Used by docomo dcb sdk */</font>
+	        <font color="yellow">maven { url "http://get.kidzinmind.net/android_libraries"}</font>
+                <font color="yellow">maven { url "http://static.newton.pm/android"}</font>
+	    <font color="yellow">}</font>
+	<font color="yellow">}</font>
+
+	....
+          		</code>
+          	</pre>
+          </p>
+				<br>
+          		<h2>Step 2 / 4 - Add gradle dependencies</h2>
+          <p class="well note">
+              In the app build.gradle file add the new two dependencies <br>
+          </p>
+          	<pre>
+          		<code>
+	apply plugin: 'com.android.application'
+
+	android {
+	    compileSdkVersion 22
+	    buildToolsVersion "25.0.0"
+	    ....
+	}
+
+	dependencies {
+	    ....
+            <font color="yellow">/* The okhttp depency is needed for docomo sdk.*/</font>
+	    <font color="yellow">compile 'com.squareup.okhttp3:okhttp:3.0.1'</font>
+	    <font color="yellow">compile 'com.docomodigital.sdk:Dcb:1.0.8@aar'</font>
+            <font color="yellow">compile 'com.buongiorno:newton:1.12.2@aar'</font>
+
+	}
+          		</code>
+          	</pre>
+          </p>
+
+          <br>
+          <h2>Step 3 / 4 - Add manifest permissions</h2>
+
+
+          <p class="well note">
+              In your <code>AndroidManifest.xml</code> add (if they are absents) three new permissions <code>INTERNET</code>, <code>GET_ACCOUNTS</code> and check which is your main <code>android.intent.category.LAUNCHER</code> <code>Activity</code> class
+          </p>
+          <br>
+          </span>
+          </span>
+          
+
+          <pre>
+          <code>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    .....&gt;
+
+            ....
+            <font color="yellow">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+            &lt;uses-permission android:name=&quot;android.permission.GET_ACCOUNTS&quot; /&gt;
+            </font>
+            ....
+
+            &lt;application ....&gt;
+                &lt;activity android:name=&quot;<font color="yellow">[.LauncherActivity]</font>&quot;&gt;
+                    &lt;intent-filter&gt;
+                        &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+                        &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+                    &lt;/intent-filter&gt;
+                &lt;/activity&gt;
+            
+            .....
+
+          
+		</code>
+		</pre>
+
+			<br><br>
+          	<h2>Step 4 / 4 - Add the user verification</h2>
+
+          <p class="well note">
+              In your <code>LAUNCHER</code> Activity add the call to the <code>Dcb.with(this, "apikey", "product-id").recognise()</code> method and in case of no grant, exit from the oncreate
+          </p>
+          <span class="note">Just after the <code>super.onCreate(savedInstanceState)</code> </span>
+          <pre>          
+		  <code data-language="java">
+	public class LauncherActivity extends AppCompatActivity {
+		.....
+
+	    @Override
+	    protected void onCreate(Bundle savedInstanceState) {
+	        super.onCreate(savedInstanceState);
+
+	        Dcb.with(this, "apikey", "product-id").recognise(new DcbCallback() {
+                    @Override
+                    public void onSuccess(DocomoUser dcbUser) {
+                        //User is recognised as Docomo Acquisition
+
+                        if (dcbUser.isSubscribed) {
+                            //User is subscribed, goto ahead with product
+                        } else {
+                            //User expired, not subscribed
+                            //user must pay again to access the product
+                            dcbUser.openAcquisitionPage(MainActivity.this);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        //Normal user discover the app from goole play
+                        //Here do normal thing of the app
+                    }
+                });
+
+	        ......
+		  </code>
+          </pre>
+          <br>
+		  <br>
+
+		  <h2>Hooray! You have finished the integratoin.<br>
+      Do you have the expected result? No? get in touch with Native apps team</h2>
+		  <p>
+
+		  <!--<img src="img/case1.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="Responsive image"><br>
+		  <img src="img/case2.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="Responsive image">-->
+          <br>
+		  <br><br><br>
+		  <p style="font-size: 24pt; ">Best from<br><font style="max-width: 100%; height: auto; font-size: 48pt; font-family: 'Allura', cursive;">Native App Team</font>
+
+		  </p>
+      </div>
+      </div><!--/row-->
+          
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/rainbow/rainbow.min.js"></script>
+    <script src="js/rainbow/language/generic.js"></script>
+    <script src="js/rainbow/language/html.js"></script>
+    <script src="js/rainbow/language/css.js"></script>
+    <script src="js/rainbow/language/javascript.js"></script>
+    <script src="js/rainbowlines/rainbow.linenumbers.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.tocify.min.js"></script>
+    <script src="js/prettify.js"></script>
+
+    <script>
+        $(function() {
+
+          $("#toc").tocify({ selectors: "h2, h3, h4", scrollTo: 60, highlightOffset: 60, extendPage: true });
+
+          prettyPrint();
+
+          $(".optionName").popover({ trigger: "hover", container: "body" });
+
+          $("a[href='#']").click(function(event) {
+
+              event.preventDefault();
+
+          });
+
+          Rainbow.color();
+        });
+    </script>
+  
+</div>
+</div>
+</body></html>
