@@ -76,33 +76,38 @@
         </div><!--/span-->
         <div class="col-sm-9 col-md-9">
           <div class="">
-            <h1>Direct Carrier Billing Android Sdk</h1> 
+            <h1>Direct Carrier Billing Android/iOS Sdk</h1> 
 
             <br><br>
 
             <h2>Description</h2>
-            <p>Documentation and example of DOCOMO Digital Direct Carrier Billing (from now on DCB)  SDK for Android</p>
+            <p>Documentation and example of DOCOMO Digital Direct Carrier Billing (from now on DCB)  SDK for Android (Including Android TV) and iOS (Including tvOS)</p>
             <p>Following this guide your app will be techically enabled to be promoted and integrated with Docomo Digital mobile payment.</p>
-            <p>After the integration of the sdk the resultant app can check if the user coming from docomo acquisition and can check expiration date and several informations.</p>
+            <p>After the integration of the sdk the resultant app can check if the user coming from docomo acquisition (optionally with explicit login with msdisdn+pin) and can check expiration date and several informations.</p>
             <br>
-      <p>This integration can be used in apps already published on Google Play or outside Google Play.</p>
+      <p>This integration can be used in apps already published on Google Play/App Store or only in case of Android environment, outside Google Play.</p>
       </p><br><br>
           </div>
           <h2>Requirements</h2>
           <br>
           <p class="well">
-          Android Studio ™ with Gradle 2.x+
+          <b>Android Studio ™</b> with Gradle 2.x+ <br>
+          or<br>
+          <b>XCode 10+ ™</b> with Carthage
+          <br>
+          <br>
+          Java/Kotlin/Swift
           </p>
           <br>
-          <h2>Getting Started with Java integration</h2>
+          <h2>Getting Started with Android java integration</h2>
           <br>
           
-		  <p>Let's say you have an app and this is the normal flow of your app launched from the home screen.
+		      <!--<p>Let's say you have an app and this is the normal flow of your app launched from the home screen.
           <br><span class="note"><strong>Note: </strong>At the end of the steps you can take a look at the resultant launch flow after SDK integration</span><br>
           <img src="img/case0.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="Responsive image"><br>
 
           <p>
-          <p>Then we can start</p><br><br>
+          <p>Then we can start</p><br><br>-->
           <p>You can clone the example app to see a working integration and/or follow the instructions</p>
 		  <p><a href="https://github.com/docomodigital/Android_DcbSdkSample">Android_DcbSdkSample in Github</a><p></p>
 		  <p>git clone https://github.com/docomodigital/Android_DcbSdkSample</p>
@@ -241,9 +246,124 @@
           <br>
 		  <br>
 
-		  <h2>Hooray! You have finished the integratoin.<br>
-      Do you have the expected result? No? get in touch with Native apps team</h2>
-		  <p>
+
+<h2>Getting Started with iOS swift integration</h2>
+          <br>
+          
+          <!--<p>Let's say you have an app and this is the normal flow of your app launched from the home screen.
+          <br><span class="note"><strong>Note: </strong>At the end of the steps you can take a look at the resultant launch flow after SDK integration</span><br>
+          <img src="img/case0.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="Responsive image"><br>
+
+          <p>
+          <p>Then we can start</p><br><br>-->
+          
+          <!--<p>You can clone the example app to see a working integration and/or follow the instructions</p>
+      <p><a href="https://github.com/docomodigital/Android_DcbSdkSample">Android_DcbSdkSample in Github</a><p></p>
+      <p>git clone https://github.com/docomodigital/Android_DcbSdkSample</p>
+          <br><br>-->
+              <h2>Step 1 / 4 - Download dependencies with carthage</h2>
+          <p class="well note">
+            Create a Cartfile or add belows line on Cartfile
+<code>
+            git "http://repo-03.dodi.io/iOSApplications/dcbapi"
+</code><br><br>
+Open the terminal and run "carthage update". This will fetch dependencies into a Carthage folder and build each source based framework or download the pre-builded framework.<br>
+              <br>
+              <span class="note"><strong>Note: </strong>This SDK support the Carthage dependency. If the first time that you use Carthage, you can learn more on this link https://github.com/Carthage/Carthage</span>
+          </p>
+          <!--
+            <pre>
+              <code>
+  ....
+
+  <font color="yellow">allprojects {</font>
+      <font color="yellow">repositories {</font>
+          jcenter()
+
+          <font color="yellow">/* Used by docomo dcb sdk */</font>
+          <font color="yellow">maven { url "http://artifactory.docomodigital.com/artifactory/docomodigital-gradle" }</font>
+                <font color="yellow">maven { url "https://artiposer.newton.pm/native/android/" }</font>
+                <font color="yellow">maven { url "http://static.newton.pm/android" }</font>   
+
+      <font color="yellow">}</font>
+  <font color="yellow">}</font>
+
+  ....
+              </code>
+            </pre>
+          </p>
+        <br>
+      -->
+              <h2>Step 2 / 4 - Add framework to your project</h2>
+          <p class="well note">
+              On your application targets’ General settings tab, in the “Linked Frameworks and Libraries” section, drag and drop the dcbapi framework from the Carthage build folder on disk. <br>
+  
+          </p>
+
+          <br>
+          <h2>Step 3 / 4 - Build Phases settings</h2>
+
+On your application targets <code>Build Phases</code> settings tab, click the + icon and choose <code>New Run Script</code> Phase. Create a Run Script in which you specify your shell <code>(ex: /bin/sh)</code>, add the following contents to the script area below the shell:<br>
+<br>
+<code>/usr/local/bin/carthage copy-frameworks</code><br>
+<br>
+Add the paths to the frameworks you want to use under “Input Files". In our case:<br>
+<br>
+          <p class="well note">
+<code>$(SRCROOT)/Carthage/Build/iOS/DCBApi.framework</code><br>
+</p>
+<br>
+          </span>
+          </span>
+          
+
+      <br><br>
+            <h2>Step 4 / 4 - Add the user verification</h2>
+
+          <p class="well note">
+              You can now implement the code for this SDK, on you project:
+          </p>
+          <!--<span class="note">Just after the <code>super.onCreate(savedInstanceState)</code> </span>-->
+          <pre>          
+      <code data-language="swift">
+  import DCBApi
+
+  var dcbApiClient: (host: String, apikey: String, catalog: String, country: String, namespace: String) {
+        return ("&lt;host&gt;", "&lt;key>", "&lt;service-key>", "&lt;country>", "&lt;storage-space>")
+    }
+
+  let client = DCBApiClient(host: dcbApiClient.host,
+                                  apikey: dcbApiClient.apikey,
+                                  catalog: dcbApiClient.catalog,
+                                  country: dcbApiClient.country,
+                                  namespace: dcbApiClient.namespace)
+
+  DCBUserManager(client: client).check(isActive: true) { date in
+            if let dcbUser = DCBUserManager.dcbUser {
+                  //User is recognised as Docomo Acquisition​
+
+                if let date = date {
+                    //User is subscribed
+
+                }
+                else {
+                    //User expired, not subscribed​
+                    //user must pay again to access the product​
+                }
+            }
+            else {
+              //Normal user discover the app from AppStore
+            }
+
+      </code>
+          </pre>
+          <br>
+      <br>
+
+      <h2>Hooray! You have finished the integration.<br>
+      Do you have the expected result? No? <br><br>Get in touch with Native apps team <a href="mailto://apps@docomodigital.com">apps@docomodigital.com</a></h2>
+      <p>
+
 
 		  <!--<img src="img/case1.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="Responsive image"><br>
 		  <img src="img/case2.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="Responsive image">-->
