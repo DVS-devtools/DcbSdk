@@ -127,7 +127,6 @@
 
 	        <font color="yellow">/* Used by docomo dcb sdk */</font>
 	        <font color="yellow">maven { url "http://artifactory.docomodigital.com/artifactory/docomodigital-gradle" }</font>
-                <font color="yellow">maven { url "https://artiposer.newton.pm/native/android/" }</font>
                 <font color="yellow">maven { url "http://static.newton.pm/android" }</font>		
 
 	    <font color="yellow">}</font>
@@ -145,19 +144,14 @@
           	<pre>
           		<code>
 	apply plugin: 'com.android.application'
-
-	android {
-	    compileSdkVersion 22
-	    buildToolsVersion "25.0.0"
-	    ....
-	}
-
+  ....
 	dependencies {
 	    ....
             <font color="yellow">/* The okhttp depency is needed for docomo sdk.*/</font>
-	    <font color="yellow">compile 'com.squareup.okhttp3:okhttp:3.10.1'</font>
-	    <font color="yellow">compile 'com.docomodigital.native.library:dcb_sdk:2.2.9@aar'</font>
-            <font color="yellow">compile 'com.buongiorno:newton:1.15.1@aar'</font>
+	    <font color="yellow">implementation 'com.squareup.okhttp3:okhttp:3.10.1'</font>
+      <font color="yellow">implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.10.0'</font>
+	    <font color="yellow">implementation 'com.docomodigital.native.library:dcb_sdk:2.2.9@aar'</font>
+            <font color="yellow">implementation 'com.buongiorno:newton:1.15.1@aar'</font>
 
 	}
           		</code>
@@ -184,7 +178,6 @@
 
             ....
             <font color="yellow">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
-            &lt;uses-permission android:name=&quot;android.permission.GET_ACCOUNTS&quot; /&gt;
             </font>
             ....
 
@@ -218,7 +211,8 @@
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 
-	        Dcb.with(this, "apikey", "product-id").recognise(new DcbCallback() {
+          //Dc.with(Context context, String apikey, String product_id, String namespace, String device_country, String host)
+	        Dcb.with(this, "apikey", "product-id", "namespace", "us", "host").recognise(new DcbCallback() {
                     @Override
                     public void onSuccess(DocomoUser dcbUser) {
                         //User is recognised as Docomo Acquisition
