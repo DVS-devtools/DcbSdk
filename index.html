@@ -229,7 +229,9 @@
                     }
 
                     @Override
-                    public void onFailure() {
+                    public void onFailure(NewtonError newtonError) {
+                        //Error informations are stored in newtonError Object.
+                        Log.d("failure:", newtonError.getInfo());
                         //Normal user discover the app from goole play
                         //Here do normal thing of the app
                     }
