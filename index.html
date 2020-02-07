@@ -112,7 +112,7 @@
 		  <p><a href="https://github.com/docomodigital/Android_DcbSdkSample">Android_DcbSdkSample in Github</a><p></p>
 		  <p>git clone https://github.com/docomodigital/Android_DcbSdkSample</p>
 		  		<br><br>
-          		<h2>Step 1 / 4 - Add Maven URL</h2>
+          		<h2>Step 1 / 5 - Add Maven URL</h2>
           <p class="well note">
               In the project build.gradle file add necessary maven url<br>
               <span class="note"><strong>Note: </strong>the build.gradle placed on the root of the android project</span>
@@ -137,7 +137,7 @@
           	</pre>
           </p>
 				<br>
-          		<h2>Step 2 / 4 - Add gradle dependencies</h2>
+          		<h2>Step 2 / 5 - Add gradle dependencies</h2>
           <p class="well note">
               In the app build.gradle file add the new two dependencies <br>
           </p>
@@ -152,7 +152,7 @@
 	   <font color="yellow">implementation 'com.squareup.okhttp3:okhttp:3.10.1'</font>
            <font color="yellow">implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.10.0'</font>
            <font color="yellow">implementation 'com.docomodigital.native.library:dcb_sdk:2.2.9@aar'</font>
-           <font color="yellow">implementation 'com.buongiorno:newton:1.15.1@aar'</font>
+<!--           <font color="yellow">implementation 'com.buongiorno:newton:1.15.1@aar'</font>-->
 
 	}
           		</code>
@@ -160,11 +160,13 @@
           </p>
 
           <br>
-          <h2>Step 3 / 4 - Add manifest permissions</h2>
+          <h2>Step 3 / 5 - Add manifest permissions</h2>
 
 
           <p class="well note">
-              In your <code>AndroidManifest.xml</code> add (if is absent) one new permissions <code>INTERNET</code> and check which is your main <code>android.intent.category.LAUNCHER</code> <code>Activity</code> class
+              In your <code>AndroidManifest.xml</code> add (if is absent) one new permissions <code>INTERNET</code> and
+              check which is your main <code>android.intent.category.LAUNCHER</code> <code>Activity</code> class,
+              also be sure to extend <code>Application</code> class (here named <code>App</code>)
           </p>
           <br>
           </span>
@@ -182,7 +184,9 @@
             </font>
             ....
 
-            &lt;application ....&gt;
+            &lt;application ....
+              android:name="<font color="yellow">.App</font>"
+              &gt;
                 &lt;activity android:name=&quot;<font color="yellow">[.LauncherActivity]</font>&quot;&gt;
                     &lt;intent-filter&gt;
                         &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
@@ -197,15 +201,14 @@
 		</pre>
 
 			<br><br>
-          	<h2>Step 4 / 4 - Add the user verification</h2>
+          	<h2>Step 4 / 5 - Add the library bootstrap</h2>
 
           <p class="well note">
-              In your <code>LAUNCHER</code> Activity add the call to the <code>Dcb.with(this, "apikey", "product-id", "namespace", "us", "host").recognise()</code> 
+              In your <code>APPLICATION</code> add the call to the <code>Dcb.with(this, "apikey", "product-id", "namespace", "country_code", "host")</code>just after the <code>super.onCreate()</code>
           </p>
-          <span class="note">Just after the <code>super.onCreate(savedInstanceState)</code> </span>
-          <pre>          
+          <pre>
 		  <code data-language="java">
-	public class LauncherActivity extends AppCompatActivity {
+	public class App extends Application {
 		.....
 
 	    @Override
@@ -213,7 +216,31 @@
 	        super.onCreate(savedInstanceState);
 
           //Dc.with(Context context, String apikey, String product_id, String namespace, String device_country, String host)
-	        Dcb.with(this, "apikey", "product-id", "namespace", "us", "host").recognise(new DcbCallback() {
+	        Dcb.with(this, "apikey", "product-id", "namespace", "us", "host");
+
+	        ......
+		  </code>
+          </pre>
+          <br>
+		  <br>
+
+            <br><br>
+            <h2>Step 5 / 5 - Call the "recognise" method to get the data</h2>
+
+            <p class="well note">
+                In your <code>LAUNCHER</code> Activity retrieve a Dcb instance and try to call recognise method <code>Dcb.getInstance().recognise()</code>
+            </p>
+            <span class="note">Just after the <code>super.onCreate(savedInstanceState)</code> </span>
+            <pre>
+		  <code data-language="java">
+	public class Launcher extends AppCompatActivity {
+		.....
+
+	    @Override
+	    protected void onCreate(Bundle savedInstanceState) {
+	        super.onCreate(savedInstanceState);
+
+	         Dcb.getInstance().recognise(new DcbCallback() {
                     @Override
                     public void onSuccess(DocomoUser dcbUser) {
                         //User is recognised as Docomo Acquisition
@@ -232,18 +259,16 @@
                     public void onFailure(NewtonError newtonError) {
                         //Error informations are stored in newtonError Object.
                         Log.d("failure:", newtonError.getInfo());
-                        //Normal user discover the app from goole play
-                        //Here do normal thing of the app
+                        //you're here because the user discovered the app on Google Play
+                        //go on with your code
                     }
                 });
 
 	        ......
 		  </code>
           </pre>
-          <br>
-		  <br>
-
-
+            <br>
+            <br>
 <h2>Getting Started with iOS swift integration</h2>
           <br>
           
