@@ -204,8 +204,10 @@
           	<h2>Step 4 / 5 - Add the library bootstrap</h2>
 
           <p class="well note">
-              In your <code>APPLICATION</code> add the call to the <code>Dcb.with(this, "apikey", "product-id", "namespace", "country_code", "host", "fingerprint_host", "is_test")</code>
-              just after the <code>super.onCreate()</code> "fingerprint host" is an optional string should be leaved null, "is_test" is useful for internal test purposes, should be false
+              In your <code>APPLICATION</code> add the call to
+              <code>
+                  Dcb.with(...)
+              </code> just after the <code>super.onCreate()</code>
           </p>
           <pre>
 		  <code data-language="java">
@@ -221,6 +223,9 @@
 	        ......
 		  </code>
           </pre>
+            <p class="well note">
+                All configuration parameters are provided by Docomo Digital. The last two arguments are <code>"fingerprint host"</code> and <code>"isTest"</code> and should be leaved as shown if not specified
+            </p>
           <br>
 		  <br>
 
