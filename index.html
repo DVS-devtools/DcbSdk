@@ -49,7 +49,9 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-      <li><a href="https://github.com/docomodigital/Android_DcbSdkSample" target="_blank">Github Example</a></li>
+      <li><a href="https://github.com/docomodigital/Android_DcbSdkSample" target="_blank">Github Example Android</a></li>
+      <li><a href="https://github.com/docomodigital/DcbSdk-iOS" target="_blank">Github Example iOS</a></li>
+
       <!--<li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -276,6 +278,7 @@
             <br>
 <h2>Getting Started with iOS swift integration</h2>
           <br>
+          <br>
           
           <!--<p>Let's say you have an app and this is the normal flow of your app launched from the home screen.
           <br><span class="note"><strong>Note: </strong>At the end of the steps you can take a look at the resultant launch flow after SDK integration</span><br>
@@ -292,38 +295,16 @@
           <p class="well note">
             Create a Cartfile or add belows line on Cartfile
 <code>
-            git "https://github.com/docomodigital/ios-dcbapi"
+            git "https://github.com/docomodigital/DcbSdk-iOS"
 </code><br><br>
 Open the terminal and run "carthage update". This will fetch dependencies into a Carthage folder and build each source based framework or download the pre-builded framework.<br>
               <br>
               <span class="note"><strong>Note: </strong>This SDK support the Carthage dependency. If the first time that you use Carthage, you can learn more on this link https://github.com/Carthage/Carthage</span>
           </p>
-          <!--
-            <pre>
-              <code>
-  ....
 
-  <font color="yellow">allprojects {</font>
-      <font color="yellow">repositories {</font>
-          jcenter()
-
-          <font color="yellow">/* Used by docomo dcb sdk */</font>
-          <font color="yellow">maven { url "http://artifactory.docomodigital.com/artifactory/docomodigital-gradle" }</font>
-                <font color="yellow">maven { url "https://artiposer.newton.pm/native/android/" }</font>
-                <font color="yellow">maven { url "http://static.newton.pm/android" }</font>   
-
-      <font color="yellow">}</font>
-  <font color="yellow">}</font>
-
-  ....
-              </code>
-            </pre>
-          </p>
-        <br>
-      -->
               <h2>Step 2 / 4 - Add framework to your project</h2>
           <p class="well note">
-              On your application targets’ General settings tab, in the “Linked Frameworks and Libraries” section, drag and drop the dcbapi framework from the Carthage build folder on disk. <br>
+              On your application targets’ General settings tab, in the “Linked Frameworks and Libraries” section, drag and drop the "DCBApiExt" and "Newton" frameworks from the Carthage build folder on disk. <br>
   
           </p>
 
@@ -337,7 +318,9 @@ On your application targets <code>Build Phases</code> settings tab, click the + 
 Add the paths to the frameworks you want to use under “Input Files". In our case:<br>
 <br>
           <p class="well note">
-<code>$(SRCROOT)/Carthage/Build/iOS/DCBApi.framework</code><br>
+<code>$(SRCROOT)/Carthage/Build/iOS/DCBApiExt.framework</code><br>
+<code>$(SRCROOT)/Carthage/Build/iOS/Newton.framework</code><br>
+
 </p>
 <br>
           </span>
@@ -353,19 +336,20 @@ Add the paths to the frameworks you want to use under “Input Files". In our ca
           <!--<span class="note">Just after the <code>super.onCreate(savedInstanceState)</code> </span>-->
           <pre>          
       <code data-language="swift">
-  import DCBApi
+  import DCBApiExt
 
-  var dcbApiClient: (host: String, apikey: String, catalog: String, country: String, namespace: String) {
-        return ("&lt;host&gt;", "&lt;key>", "&lt;service-key>", "&lt;country>", "&lt;storage-space>")
+  var dcbApiClient: (baseDomain: String, confInfoDomain: String, apikey: String, catalog: String, country: String, namespace: String) {
+        return ("&lt;baseDomain&gt;", "&lt;confInfoDomain&gt;", "&lt;key>", "&lt;service-key>", "&lt;country>", "&lt;storage-space>")
     }
 
-  let client = DCBApiClient(host: dcbApiClient.host,
+  let client = DCBApiClient(baseDomain: dcbApiClient.baseDomain,
+                                  confInfoDomain: dcbApiClient.confInfoDomain,
                                   apikey: dcbApiClient.apikey,
                                   catalog: dcbApiClient.catalog,
                                   country: dcbApiClient.country,
                                   namespace: dcbApiClient.namespace)
 
-  DCBUserManager(client: client).check(isActive: true) { date in
+  DCBUserManager(client: client).checkFlowDCB(isActive: false) { date in
             if let dcbUser = DCBUserManager.dcbUser {
                   //User is recognised as Docomo Acquisition​
 
@@ -381,7 +365,7 @@ Add the paths to the frameworks you want to use under “Input Files". In our ca
             else {
               //Normal user discover the app from AppStore
             }
-
+  }
       </code>
           </pre>
           <br>
