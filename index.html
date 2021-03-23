@@ -49,6 +49,10 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
+<<<<<<< HEAD
+       <!--<li><a href="https://github.com/docomodigital/Android_DcbSdkSample" target="_blank">Github Example Android</a></li>-->
+      <li><a href="https://github.com/docomodigital/DcbSdk-iOS" target="_blank">Github Example iOS</a></li>
+=======
       <!--<li><a href="https://github.com/docomodigital/Android_DcbSdkSample" target="_blank">Github Example</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -62,8 +66,9 @@
           <li><a href="#">One more separated link</a></li>
         </ul>
       </li>-->
+>>>>>>> release/0.0.1
     </ul>
-  </div><!-- /.navbar-collapse -->
+  </div> 
 </nav>
      
 
@@ -108,220 +113,24 @@
 
           <p>
           <p>Then we can start</p><br><br>-->
-          <p>You can follow this <a href="https://github.com/DVS-devtools/DcbSdk/blob/master/android/doc/AndroidDoc.pdf">Android Integration Document</a> with instructions to integrate the library on the your project.<p></p>
-		  		<br><br>
-          <!--
-          		<h2>Step 1 / 5 - Add Maven URL</h2>
-          <p class="well note">
-              In the project build.gradle file add necessary maven url<br>
-              <span class="note"><strong>Note: </strong>the build.gradle placed on the root of the android project</span>
-          </p>
-          	<pre>
-          		<code>
-	....
-
-	<font color="yellow">allprojects {</font>
-	    <font color="yellow">repositories {</font>
-	        jcenter()
-
-	        <font color="yellow">/* Used by Digital Virgo dcb sdk */</font>
-	        <font color="yellow">maven { url "http://artifactory.docomodigital.com/artifactory/docomodigital-gradle" }</font>
-                <font color="yellow">maven { url "http://static.newton.pm/android" }</font>		
-
-	    <font color="yellow">}</font>
-	<font color="yellow">}</font>
-
-	....
-          		</code>
-          	</pre>
-          </p>
-				<br>
-          		<h2>Step 2 / 5 - Add gradle dependencies</h2>
-          <p class="well note">
-              In the app build.gradle file add the new two dependencies <br>
-          </p>
-          	<pre>
-          		<code>
-	apply plugin: 'com.android.application'
-  ....
-	dependencies {
-	    ....
-
-           <font color="yellow">/* The ok http depency is needed for digital virgo sdk.*/</font>
-	   <font color="yellow">implementation 'com.squareup.okhttp3:okhttp:3.10.1'</font>
-           <font color="yellow">implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.10.0'</font>
-           <font color="yellow">implementation 'com.docomodigital.native.library:dcb_sdk:3.0.7@aar'</font>
-	}
-          		</code>
-          	</pre>
-          </p>
-
-          <br>
-          <h2>Step 3 / 5 - Add manifest permissions</h2>
-
-
-          <p class="well note">
-              In your <code>AndroidManifest.xml</code> add (if is absent) one new permissions <code>INTERNET</code> and
-              check which is your main <code>android.intent.category.LAUNCHER</code> <code>Activity</code> class,
-              also be sure to extend <code>Application</code> class (here named <code>App</code>)
-          </p>
-          <br>
-          </span>
-          </span>
-          
-
-          <pre>
-          <code>
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    .....&gt;
-
-            ....
-            <font color="yellow">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
-            </font>
-            ....
-
-            &lt;application ....
-              android:name="<font color="yellow">.App</font>"
-              &gt;
-                &lt;activity android:name=&quot;<font color="yellow">[.LauncherActivity]</font>&quot;&gt;
-                    &lt;intent-filter&gt;
-                        &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-                        &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-                    &lt;/intent-filter&gt;
-                &lt;/activity&gt;
-            
-            .....
-
-          
-		</code>
-		</pre>
-
-			<br><br>
-          	<h2>Step 4 / 5 - Add the library bootstrap</h2>
-
-          <p class="well note">
-              In your <code>APPLICATION</code> add the call to
-              <code>
-                  Dcb.with(...)
-              </code> just after the <code>super.onCreate()</code>
-          </p>
-          <pre>
-		  <code data-language="java">
-	public class App extends Application {
-		.....
-
-	    @Override
-	    protected void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
-
-	        Dcb.with(this, "apikey", "product-id", "namespace", "us", "host", null, false);
-
-	        ......
-		  </code>
-          </pre>
-            <p class="well note">
-                All configuration parameters are provided by Digital Virgo. The last two arguments are <code>"fingerprint host"</code> and <code>"isTest"</code> and should be leaved as shown if not specified
-            </p>
-          <br>
-		  <br>
-
-            <br><br>
-            <h2>Step 5 / 5 - Call the "recognise" method to get the data</h2>
-
-            <p class="well note">
-                In your <code>LAUNCHER</code> Activity retrieve a Dcb instance and try to call recognise method <code>Dcb.getInstance().recognise()</code>
-            </p>
-            <span class="note">Just after the <code>super.onCreate(savedInstanceState)</code> </span>
-            <pre>
-		  <code data-language="java">
-	public class Launcher extends AppCompatActivity {
-		.....
-
-	    @Override
-	    protected void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
-
-	         Dcb.getInstance().recognise(new DcbCallback() {
-                    @Override
-                    public void onSuccess(DigitalVirgoUser dcbUser) {
-                        //User is recognised as DigitalVirgo Acquisition
-
-                        if (dcbUser.isSubscribed) {
-                            //User is subscribed, goto ahead with product
-                        } else {
-                            //User expired, not subscribed
-                            //user must pay again to access the product
-                            dcbUser.openAcquisitionPage(MainActivity.this);
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(NewtonError newtonError) {
-                        //Error informations are stored in newtonError Object.
-                        Log.d("failure:", newtonError.getInfo());
-                        //you're here because the user discovered the app on Google Play
-                        //go on with your code
-                    }
-                });
-
-	        ......
-		  </code>
-          </pre>
+          <p>Follow this documention that you find on this link <a href="https://github.com/docomodigital/DcbSdk/raw/master/android/doc/AndroidDoc.pdf">DCB Android Documentation</a></p>		  
             <br>
             <br>
-            -->
 <h2>Getting Started with iOS swift integration</h2>
-          <br>
-          
-          <!--<p>Let's say you have an app and this is the normal flow of your app launched from the home screen.
-          <br><span class="note"><strong>Note: </strong>At the end of the steps you can take a look at the resultant launch flow after SDK integration</span><br>
-          <img src="img/case0.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="Responsive image"><br>
-
-          <p>
-          <p>Then we can start</p><br><br>-->
-          
-          <!--<p>You can clone the example app to see a working integration and/or follow the instructions</p>
-      <p><a href="https://github.com/docomodigital/Android_DcbSdkSample">Android_DcbSdkSample in Github</a><p></p>
-      <p>git clone https://github.com/docomodigital/Android_DcbSdkSample</p>
-          <br><br>-->
               <h2>Step 1 / 4 - Download dependencies with carthage</h2>
           <p class="well note">
             Create a Cartfile or add belows line on Cartfile
 <code>
-            git "https://github.com/docomodigital/ios-dcbapi"
+            git "https://github.com/docomodigital/DcbSdk-iOS"
 </code><br><br>
 Open the terminal and run "carthage update". This will fetch dependencies into a Carthage folder and build each source based framework or download the pre-builded framework.<br>
               <br>
               <span class="note"><strong>Note: </strong>This SDK support the Carthage dependency. If the first time that you use Carthage, you can learn more on this link https://github.com/Carthage/Carthage</span>
           </p>
-          <!--
-            <pre>
-              <code>
-  ....
 
-  <font color="yellow">allprojects {</font>
-      <font color="yellow">repositories {</font>
-          jcenter()
-
-          <font color="yellow">/* Used by docomo dcb sdk */</font>
-          <font color="yellow">maven { url "http://artifactory.docomodigital.com/artifactory/docomodigital-gradle" }</font>
-                <font color="yellow">maven { url "https://artiposer.newton.pm/native/android/" }</font>
-                <font color="yellow">maven { url "http://static.newton.pm/android" }</font>   
-
-      <font color="yellow">}</font>
-  <font color="yellow">}</font>
-
-  ....
-              </code>
-            </pre>
-          </p>
-        <br>
-      -->
               <h2>Step 2 / 4 - Add framework to your project</h2>
           <p class="well note">
-              On your application targets’ General settings tab, in the “Linked Frameworks and Libraries” section, drag and drop the dcbapi framework from the Carthage build folder on disk. <br>
+              On your application targets’ General settings tab, in the “Linked Frameworks and Libraries” section, drag and drop the "DCBApiExt" and "Newton" frameworks from the Carthage build folder on disk. <br>
   
           </p>
 
@@ -335,7 +144,9 @@ On your application targets <code>Build Phases</code> settings tab, click the + 
 Add the paths to the frameworks you want to use under “Input Files". In our case:<br>
 <br>
           <p class="well note">
-<code>$(SRCROOT)/Carthage/Build/iOS/DCBApi.framework</code><br>
+<code>$(SRCROOT)/Carthage/Build/iOS/DCBApiExt.framework</code><br>
+<code>$(SRCROOT)/Carthage/Build/iOS/Newton.framework</code><br>
+
 </p>
 <br>
           </span>
@@ -351,19 +162,20 @@ Add the paths to the frameworks you want to use under “Input Files". In our ca
           <!--<span class="note">Just after the <code>super.onCreate(savedInstanceState)</code> </span>-->
           <pre>          
       <code data-language="swift">
-  import DCBApi
+  import DCBApiExt
 
-  var dcbApiClient: (host: String, apikey: String, catalog: String, country: String, namespace: String) {
-        return ("&lt;host&gt;", "&lt;key>", "&lt;service-key>", "&lt;country>", "&lt;storage-space>")
+  var dcbApiClient: (baseDomain: String, confInfoDomain: String, apikey: String, catalog: String, country: String, namespace: String) {
+        return ("&lt;baseDomain&gt;", "&lt;confInfoDomain&gt;", "&lt;key>", "&lt;service-key>", "&lt;country>", "&lt;storage-space>")
     }
 
-  let client = DCBApiClient(host: dcbApiClient.host,
+  let client = DCBApiClient(baseDomain: dcbApiClient.baseDomain,
+                                  confInfoDomain: dcbApiClient.confInfoDomain,
                                   apikey: dcbApiClient.apikey,
                                   catalog: dcbApiClient.catalog,
                                   country: dcbApiClient.country,
                                   namespace: dcbApiClient.namespace)
 
-  DCBUserManager(client: client).check(isActive: true) { date in
+  DCBUserManager(client: client).checkFlowDCB(isActive: false) { date in
             if let dcbUser = DCBUserManager.dcbUser {
                   //User is recognised as Digital Virgo Acquisition​
 
@@ -379,7 +191,7 @@ Add the paths to the frameworks you want to use under “Input Files". In our ca
             else {
               //Normal user discover the app from AppStore
             }
-
+  }
       </code>
           </pre>
           <br>
