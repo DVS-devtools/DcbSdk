@@ -49,24 +49,6 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-<<<<<<< HEAD
-       <!--<li><a href="https://github.com/docomodigital/Android_DcbSdkSample" target="_blank">Github Example Android</a></li>-->
-      <li><a href="https://github.com/docomodigital/DcbSdk-iOS" target="_blank">Github Example iOS</a></li>
-=======
-      <!--<li><a href="https://github.com/docomodigital/Android_DcbSdkSample" target="_blank">Github Example</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-          <li class="divider"></li>
-          <li><a href="#">One more separated link</a></li>
-        </ul>
-      </li>-->
->>>>>>> release/0.0.1
     </ul>
   </div> 
 </nav>
@@ -117,16 +99,19 @@
             <br>
             <br>
 <h2>Getting Started with iOS swift integration</h2>
+<p class="well">
+  You can download this project on <a href="https://github.com/dvs-devtools/DcbSdk-iOS"> iOS App Test</a> for test and see the behavior.
+</p>    <br>
+            <br>
               <h2>Step 1 / 4 - Download dependencies with carthage</h2>
           <p class="well note">
             Create a Cartfile or add belows line on Cartfile
-<code>
-            git "https://github.com/docomodigital/DcbSdk-iOS"
-</code><br><br>
+<br><br>
 Open the terminal and run "carthage update". This will fetch dependencies into a Carthage folder and build each source based framework or download the pre-builded framework.<br>
               <br>
               <span class="note"><strong>Note: </strong>This SDK support the Carthage dependency. If the first time that you use Carthage, you can learn more on this link https://github.com/Carthage/Carthage</span>
-          </p>
+          </p><br>
+            <br>
 
               <h2>Step 2 / 4 - Add framework to your project</h2>
           <p class="well note">
@@ -134,7 +119,8 @@ Open the terminal and run "carthage update". This will fetch dependencies into a
   
           </p>
 
-          <br>
+        <br>
+            <br>
           <h2>Step 3 / 4 - Build Phases settings</h2>
 
 On your application targets <code>Build Phases</code> settings tab, click the + icon and choose <code>New Run Script</code> Phase. Create a Run Script in which you specify your shell <code>(ex: /bin/sh)</code>, add the following contents to the script area below the shell:<br>
