@@ -1,4 +1,4 @@
 # DcbSdk
-Docomo Digital SDK
+Digital Virgo SDK
 
-https://docomodigital.github.io/DcbSdk/
+https://dvs-devtools.github.io/DcbSdk/
